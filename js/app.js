@@ -1,6 +1,7 @@
 
-
 window.onload = function() {
+  //keep track of state
+  let emailState = false;
   let emailModal = document.getElementsByClassName('email-modal') [0];
   let closeModal = document.getElementsByClassName('email-modal__close-btn') [0];
   let declineText = document.getElementsByClassName('email-modal__decline-offer')[0];
@@ -9,16 +10,25 @@ window.onload = function() {
   let picBox = document.getElementsByClassName('img-box') [0];
   let closePicButton = document.getElementsByClassName('pic-close-btn') [0];
 
-  console.log(emailModal)
-
+  let showModal = () => {
+    if (emailState == false) {
+    emailModal.classList.add('email-modal--visible');
+    emailState = true
+    }
+  }
+  //console.log(emailModal)
   closeModal.addEventListener('click', () => {
     emailModal.classList.remove('email-modal--visible');
     console.log('click')
   });
-  document.addEventListener('mouseleave', () => {
-    //alert('Mouse left');
-    emailModal.classList.add('email-modal--visible');
+  
+    //added .body so event will work in firefox browser
+    document.body.addEventListener('mouseleave', () => {
+      //alert('Mouse left');
+      showModal ();
+      //console.log('mouse left');
   });
+
   declineText.addEventListener('click', () => {
     emailModal.classList.remove('email-modal--visible');
     console.log('click')
