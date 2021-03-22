@@ -10,6 +10,8 @@ window.onload = function() {
   let emailButton = document.getElementsByClassName('email-modal__button') [0];
   let declineText = document.getElementsByClassName('email-modal__decline-offer')[0];
 
+  let thankContainer = document.getElementsByClassName('email-modal__thank')[0];
+
   let viewButton = document.getElementsByClassName('view-pic-btn') [0];
   let picBox = document.getElementsByClassName('img-box') [0];
   let closePicButton = document.getElementsByClassName('pic-close-btn') [0];
@@ -40,23 +42,27 @@ window.onload = function() {
     document.getElementsByClassName('email-modal__error-message')[0].classList.remove('email-modal__error-message--active');
   }
 
-  emailInput.addEventListener('click', () => {
-    removeErrors();
-  })
-  emailButton.addEventListener('click', () => {
-    if (emailIsValid(emailInput.value)) {
-      console.log(emailInput.value)
-    } else {
-      addErrors();
-    }
-    //console.log(emailInput.value)
-  })
-
+  let showThankMessage = () => {
+    thankContainer.classList.add('email-thank--success');
+  }
 
   closeButton.addEventListener('click', () => {
     closeModal();
     //console.log('click')
   });
+
+  emailInput.addEventListener('click', () => {
+    removeErrors();
+  })
+  emailButton.addEventListener('click', () => {
+    if (emailIsValid(emailInput.value)) {
+      //console.log(emailInput.value)
+      showThankMessage();
+    } else {
+      addErrors();
+    }
+    //console.log(emailInput.value)
+  })
 
     //added .body so event will work in firefox browser
     document.body.addEventListener('mouseleave', () => {
@@ -67,6 +73,8 @@ window.onload = function() {
 
   declineText.addEventListener('click', () => {
     emailModal.classList.remove('email-modal--visible');
+// Or reuse closeModal() function
+    closeModal();
     console.log('click')
   });
   console.log(document)
