@@ -10,7 +10,7 @@ window.onload = function() {
   let emailButton = document.getElementsByClassName('email-modal__button') [0];
   let declineText = document.getElementsByClassName('email-modal__decline-offer')[0];
 
-  let thankContainer = document.getElementsByClassName('email-modal__thank')[0];
+  let thankContainer = document.getElementsByClassName('email-thank')[0];
 
   let viewButton = document.getElementsByClassName('view-pic-btn') [0];
   let picBox = document.getElementsByClassName('img-box') [0];
@@ -44,6 +44,10 @@ window.onload = function() {
 
   let showThankMessage = () => {
     thankContainer.classList.add('email-thank--success');
+// Thankyou message will go away after 3 sec if user does not click the close button.
+    setTimeout(() => {
+      closeModal();
+    }, 3000)
   }
 
   closeButton.addEventListener('click', () => {
