@@ -22,7 +22,10 @@ window.onload = function() {
     if (emailIsValid(emailInput.value)) {
       console.log(emailInput.value)
     } else {
-      alert('This is not a valid email.')
+      //alert('This is not a valid email.')
+//Display error message if email is not in valid format.
+      document.getElementsByClassName('email-modal__form-group')[0].classList.add('email-modal__form-group--error');
+      document.getElementsByClassName('email-modal__error-message')[0].classList.add('email-modal__error-message--active');
     }
     //console.log(emailInput.value)
   })
