@@ -3,7 +3,7 @@ window.onload = function() {
   //keep track of state
   let emailState = false;
   let emailModal = document.getElementsByClassName('email-modal') [0];
-  let closeModal = document.getElementsByClassName('email-modal__close-btn') [0];
+  let closeButton = document.getElementsByClassName('email-modal__close-btn') [0];
   //Valdidate email input
   let emailInput = document.getElementsByClassName('email-modal__input') [0];
   //email send button
@@ -18,17 +18,6 @@ window.onload = function() {
   function emailIsValid (email) {
     return /\S+@\S+\.\S+/.test(email)
   }
-  emailButton.addEventListener('click', () => {
-    if (emailIsValid(emailInput.value)) {
-      console.log(emailInput.value)
-    } else {
-      //alert('This is not a valid email.')
-//Display error message if email is not in valid format.
-      document.getElementsByClassName('email-modal__form-group')[0].classList.add('email-modal__form-group--error');
-      document.getElementsByClassName('email-modal__error-message')[0].classList.add('email-modal__error-message--active');
-    }
-    //console.log(emailInput.value)
-  })
 
   let showModal = () => {
     if (emailState == false) {
@@ -37,9 +26,36 @@ window.onload = function() {
     }
   }
   //console.log(emailModal)
-  closeModal.addEventListener('click', () => {
+  let closeModal = () => {
     emailModal.classList.remove('email-modal--visible');
-    console.log('click')
+  }
+  let addErrors = () => {
+//Add error message if email is not in valid format.
+    document.getElementsByClassName('email-modal__form-group')[0].classList.add('email-modal__form-group--error');
+    document.getElementsByClassName('email-modal__error-message')[0].classList.add('email-modal__error-message--active');
+  }
+  let removeErrors = () => {
+//Remove error message if email is not in valid format.
+    document.getElementsByClassName('email-modal__form-group')[0].classList.remove('email-modal__form-group--error');
+    document.getElementsByClassName('email-modal__error-message')[0].classList.remove('email-modal__error-message--active');
+  }
+
+  emailInput.addEventListener('click', () => {
+    removeErrors();
+  })
+  emailButton.addEventListener('click', () => {
+    if (emailIsValid(emailInput.value)) {
+      console.log(emailInput.value)
+    } else {
+      addErrors();
+    }
+    //console.log(emailInput.value)
+  })
+
+
+  closeButton.addEventListener('click', () => {
+    closeModal();
+    //console.log('click')
   });
 
     //added .body so event will work in firefox browser
@@ -54,7 +70,8 @@ window.onload = function() {
     console.log('click')
   });
   console.log(document)
-// CLOSE HIDDEN PIC SECTION
+
+// CLOSE HIDDEN PIC
   viewButton.addEventListener('click', () => {
     picBox.classList.add('img-box--visible');
     console.log('click')
